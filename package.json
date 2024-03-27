@@ -1,0 +1,11 @@
+{
+  "name": "jokes-api",
+  "version": "1.0.0",
+  "description": "A custom API that demonstrates RESTful architecture.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "jmackfair",
+  "license": "ISC"
+}
