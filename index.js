@@ -19,6 +19,12 @@ app.get('/jokes/:id', (req, res)=>{
     res.json(foundJoke)
 })
 
+app.get('/filter', (req, res)=>{
+    const type = req.query.type;
+    let filteredActivities = jokes.filter((joke) => joke.type === type);
+    res.json(filteredActivities);
+})
+
 app.listen(port, ()=>{
     console.log(`Joke API Server running on port ${port}`)
 })
