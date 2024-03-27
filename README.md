@@ -1,7 +1,7 @@
 # JokesAPI
-A custom API that demonstrates RESTful architecture.
+A custom API that demonstrates RESTful architecture. It leverages Node.js and Express.js to create the server. 
 
-It leverages Node.js and Express.js to create the server. 
+To find the API Documentation, go to https://documenter.getpostman.com/view/6048123/2s9XxsTv8Y#79b97759-642c-46e5-bc16-d8871fdd1d5d
 
 To use this API yourself:
 1. Initialize npm and use it to install the dependencies
