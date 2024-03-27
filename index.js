@@ -28,7 +28,7 @@ app.get('/filter', (req, res)=>{
     res.json(filteredActivities);
 })
 
-app.post('/jokes',(req, res)=>{
+app.post('/jokes', (req, res)=>{
     if(req.body.text && req.body.type){
         const newJoke = {
             id: jokes.length + 1,
@@ -40,6 +40,24 @@ app.post('/jokes',(req, res)=>{
         res.json(newJoke);
     }else{
         res.send("Joke could not be added. Please add both text and type parameters to the body.")
+    }
+})
+
+app.put('/jokes/:id', (req, res)=>{
+    if(req.body.text && req.body.type){
+        //Obtain relevant information from request
+        const id = parseInt(req.params.id);
+        const replacementJoke = {
+            id: id,
+            jokeText: req.body.text,
+            jokeType: req.body.type
+        };
+        //Update the joke by replacement
+        const searchIndex = jokes.findIndex((joke)=> joke.id === id);
+        jokes[searchIndex] = replacementJoke;
+        res.json(replacementJoke);
+    }else{
+        res.send("Joke could not be updated. Please add both text and type parameters to the body.")
     }
 })
 
