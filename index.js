@@ -79,6 +79,17 @@ app.patch('/jokes/:id', (req, res)=> {
     }   
 });
 
+app.delete('/jokes/:id', (req, res)=>{
+    const id = parseInt(req.params.id);
+    const searchIndex = jokes.findIndex((joke) => joke.id === id)
+    if(searchIndex > -1){
+        jokes.splice(searchIndex, 1);
+        res.sendStatus(200);
+    }else{
+        res.status(404).json({error: `Joke could not be deleted. Joke with id ${id} not found.`})
+    }
+});
+
 app.listen(port, ()=>{
     console.log(`Joke API Server running on port ${port}`)
 })
