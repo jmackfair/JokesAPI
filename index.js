@@ -6,6 +6,11 @@ app.get('/', (req, res)=>{
     res.send('Hello World!')
 })
 
+app.get('/random', (req, res)=>{
+    let randomIndex = Math.floor(jokes.length * Math.random());
+    res.json(jokes[randomIndex]);
+})
+
 app.listen(port, ()=>{
     console.log(`Joke API Server running on port ${port}`)
 })
