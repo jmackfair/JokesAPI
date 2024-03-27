@@ -6,9 +6,17 @@ app.get('/', (req, res)=>{
     res.send('Hello World!')
 })
 
+//Get a random joke
 app.get('/random', (req, res)=>{
-    let randomIndex = Math.floor(jokes.length * Math.random());
+    const randomIndex = Math.floor(jokes.length * Math.random());
     res.json(jokes[randomIndex]);
+})
+
+//Get a specific joke based on its ID
+app.get('/jokes/:id', (req, res)=>{
+    const id = parseInt(req.params.id);
+    const foundJoke = jokes.find((joke) => joke.id === id);
+    res.json(foundJoke)
 })
 
 app.listen(port, ()=>{
