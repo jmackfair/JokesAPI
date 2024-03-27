@@ -3,6 +3,8 @@ import express from "express";
 const app = express()
 const port = 3000
 
+const masterKey = "exampleAPIKey";
+
 
 //Middleware for parsing requests
 app.use(express.urlencoded({ extended: false }))
@@ -89,6 +91,16 @@ app.delete('/jokes/:id', (req, res)=>{
         res.sendStatus(200);
     }else{
         res.status(404).json({error: `Joke could not be deleted. Joke with id ${id} not found.`})
+    }
+});
+
+app.delete('/all', (req, res)=>{
+    const userKey = req.query.key;
+    if(userKey === masterKey){
+        jokes = [];
+        res.sendStatus(200);
+    }else{
+        res.status(404).json({error: `Jokes could not be deleted. Authorization denied.`})
     }
 });
 
