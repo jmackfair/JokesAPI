@@ -1,6 +1,8 @@
-const express = require('express')
+import express from "express";
+
 const app = express()
 const port = 3000
+
 
 //Middleware for parsing requests
 app.use(express.urlencoded({ extended: false }))
