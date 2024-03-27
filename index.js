@@ -2,6 +2,9 @@ const express = require('express')
 const app = express()
 const port = 3000
 
+//Middleware for parsing requests
+app.use(express.urlencoded({ extended: false }))
+
 app.get('/', (req, res)=>{
     res.send('Hello World!')
 })
@@ -23,6 +26,21 @@ app.get('/filter', (req, res)=>{
     const type = req.query.type;
     let filteredActivities = jokes.filter((joke) => joke.type === type);
     res.json(filteredActivities);
+})
+
+app.post('/jokes',(req, res)=>{
+    if(req.body.text && req.body.type){
+        const newJoke = {
+            id: jokes.length + 1,
+            jokeText: req.body.text,
+            jokeType: req.body.type
+        };
+        jokes.push(newJoke);
+        console.log(jokes.slice(-1));
+        res.json(newJoke);
+    }else{
+        res.send("Joke could not be added. Please add both text and type parameters to the body.")
+    }
 })
 
 app.listen(port, ()=>{
