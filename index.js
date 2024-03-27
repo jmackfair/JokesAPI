@@ -57,9 +57,27 @@ app.put('/jokes/:id', (req, res)=>{
         jokes[searchIndex] = replacementJoke;
         res.json(replacementJoke);
     }else{
-        res.send("Joke could not be updated. Please add both text and type parameters to the body.")
+        res.send("Joke could not be updated. Please add either text and type parameters to the body.")
     }
 })
+
+app.patch('/jokes/:id', (req, res)=> {
+    const id = parseInt(req.params.id);
+    const jokeToUpdate = jokes.find((joke) => joke.id === id);
+    if(jokeToUpdate && (req.body.text || req.body.type)){
+        const replacementJoke = {
+            id: id,
+            jokeText: req.body.text || jokeToUpdate.jokeText,
+            jokeType: req.body.type || jokeToUpdate.jokeType,
+        };
+        const searchIndex = jokes.findIndex((joke) => joke.id === id);
+        jokes[searchIndex] = replacementJoke;
+        console.log(jokes[searchIndex]);
+        res.json(replacementJoke);
+    }else{
+        res.send("Joke could not be updated. Please add both text and type parameters to the body and verify that ID is between 1 & 100.")
+    }   
+});
 
 app.listen(port, ()=>{
     console.log(`Joke API Server running on port ${port}`)
